@@ -1,6 +1,6 @@
 import { Button, ButtonGroup, Heading, VStack } from "@chakra-ui/react";
 import { Form, Formik } from "formik";
-const {formSchema} = require("@whatsapp-clone/common");
+import  formSchema from "@whatsapp-clone/common";
 import TextField from "../TextField";
 import { useNavigate } from "react-router-dom";
 
@@ -15,7 +15,6 @@ const LogIn = () => {
       validationSchema={formSchema}
       onSubmit={(values, actions) => {
         const vals = {...values};
-        console.log(JSON.stringify(vals));
         actions.resetForm();
         fetch("http://localhost:3000/auth/log-in",{
           method:"POST",
