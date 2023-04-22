@@ -1,4 +1,4 @@
-const Yup = require("yup");
+import * as Yup from "yup";
 
 const formSchema = Yup.object({
   username: Yup.string()
@@ -11,5 +11,4 @@ const formSchema = Yup.object({
     .max(20, "Password too long"),
 });
 
-module.exports = {formSchema};
-
+export default formSchema;

@@ -5,5 +5,8 @@
   "license": "MIT",
   "dependencies": {
     "yup": "^1.1.1"
+  },
+  "scripts": {
+    "build": "babel index.js --out-file index.es.js"
   }
 }

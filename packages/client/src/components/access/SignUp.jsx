@@ -1,6 +1,6 @@
 import { Button, ButtonGroup, Heading, VStack } from "@chakra-ui/react";
 import { Form, Formik } from "formik";
-import  formSchema from "@whatsapp-clone/common";
+import formSchema from "@whatsapp-clone/common";
 import TextField from "../TextField";
 import { useNavigate } from "react-router-dom";
 
