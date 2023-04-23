@@ -3,8 +3,13 @@ import { Form, Formik } from "formik";
 import formSchema from "@whatsapp-clone/common";
 import TextField from "../TextField";
 import { useNavigate } from "react-router-dom";
+import { useContext, useState } from "react";
+import { AccountContext } from "../AccountContext";
+import { Text } from "@chakra-ui/layout";
 
 const LogIn = () => {
+  const { setUser } = useContext(AccountContext);
+  const [error, setError] = useState(null);
   const navigate = useNavigate();
   return (
     <Formik
@@ -14,29 +19,34 @@ const LogIn = () => {
       }}
       validationSchema={formSchema}
       onSubmit={(values, actions) => {
-        const vals = {...values};
+        const vals = { ...values };
         actions.resetForm();
-        fetch("http://localhost:3000/auth/log-in",{
-          method:"POST",
-          credentials:"include",
-          headers:{
-            "Content-Type":"application/json"
+        fetch("http://localhost:3000/auth/log-in", {
+          method: "POST",
+          credentials: "include",
+          headers: {
+            "Content-Type": "application/json",
           },
           body: JSON.stringify(vals),
         })
-        .catch(err => {
-          return;
-        })
-        .then(res => {
-          if (!res || !res.ok || res.status >=400){
+          .catch((err) => {
             return;
-          }
-          return res.json();  
-        })
-         .then(data => {
-          if(!data) return;
-          console.log(data);
-         });
+          })
+          .then((res) => {
+            if (!res || !res.ok || res.status >= 400) {
+              return;
+            }
+            return res.json();
+          })
+          .then((data) => {
+            if (!data) return;
+            setUser({ ...data });
+            if (data.status) {
+              setError(data.status);
+            } else if (data.loggedIn) {
+              navigate("/home");
+            }
+          });
       }}
     >
       <VStack
@@ -48,7 +58,9 @@ const LogIn = () => {
         spacing="1rem"
       >
         <Heading>Log In</Heading>
-
+        <Text as="p" color="red.500">
+          {error}
+        </Text>
         <TextField
           name="username"
           placeholder="Enter username"
