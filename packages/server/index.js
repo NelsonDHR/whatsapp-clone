@@ -5,6 +5,8 @@ const cors =require("cors");
 const authRouter = require("./routers/authRouter")
 const session = require("express-session")
 require("dotenv").config()
+const Redis = require("ioredis");
+const RedisStore = require("connect-redis").default;
 
 const app = express();
 
@@ -17,6 +19,9 @@ const io = new Server(server, {
   },
 });
 
+let redisClient = new Redis()
+
+
 app.use(helmet());
 app.use(cors({
   origin: "http://localhost:5173",
@@ -28,6 +33,7 @@ app.use(session({
   secret: process.env.COOKIE_SECRET,
   credentials: true,
   name: "sid",
+  store: new RedisStore({client:redisClient, prefix:"myapp:"}),
   resave: false,
   saveUninitialized: false,
   cookie: {
