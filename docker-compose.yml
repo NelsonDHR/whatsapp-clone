@@ -1,0 +1,29 @@
+version: "3"
+
+services:
+  common:
+    build:
+      context: ./packages/common
+      dockerfile: Dockerfile
+    container_name: whatsapp-clone-common
+    image: whatsapp-clone-common:latest
+
+  client:
+    build:
+      context: ./packages/client
+      dockerfile: Dockerfile
+    container_name: whatsapp-clone-client
+    ports:
+      - "8080:8080"
+    depends_on:
+      - common
+
+  server:
+    build:
+      context: ./packages/server
+      dockerfile: Dockerfile
+    container_name: whatsapp-clone-server
+    ports:
+      - "3000:3000"
+    depends_on:
+      - common
