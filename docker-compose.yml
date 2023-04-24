@@ -12,6 +12,7 @@ services:
     build:
       context: ./packages/client
       dockerfile: Dockerfile
+    container_name: whatsapp-clone-client
     ports:
       - "8080:8080"
     depends_on:
@@ -21,6 +22,7 @@ services:
     build:
       context: ./packages/server
       dockerfile: Dockerfile
+    container_name: whatsapp-clone-server
     ports:
       - "3000:3000"
     depends_on:
