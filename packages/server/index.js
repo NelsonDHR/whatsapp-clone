@@ -1,10 +1,10 @@
 const express = require("express");
 const helmet = require("helmet");
 const { Server } = require("socket.io");
-const cors =require("cors");
-const authRouter = require("./routers/authRouter")
-const session = require("express-session")
-require("dotenv").config()
+const cors = require("cors");
+const authRouter = require("./routers/authRouter");
+const session = require("express-session");
+require("dotenv").config();
 const Redis = require("ioredis");
 const RedisStore = require("connect-redis").default;
 
@@ -12,15 +12,14 @@ const app = express();
 
 const server = require("http").createServer(app);
 
-const io = new Server(server, {
+const io = process.env.NODE_ENV !== "test" ? new Server(server, {
   cors: {
     origin: "http://localhost:5173",
     credentials: true,
   },
-});
+}) : null;
 
-let redisClient = new Redis()
-
+let redisClient = new Redis();
 
 app.use(helmet());
 app.use(cors({
@@ -33,7 +32,7 @@ app.use(session({
   secret: process.env.COOKIE_SECRET,
   credentials: true,
   name: "sid",
-  store: new RedisStore({client:redisClient, prefix:"myapp:"}),
+  store: new RedisStore({ client: redisClient, prefix: "myapp:" }),
   resave: false,
   saveUninitialized: false,
   cookie: {
@@ -42,16 +41,22 @@ app.use(session({
     expires: 1000*60*60*24*7,
     sameSite: process.env.ENVIRONMENT === "production" ? "none": "lax",
   }
-}))
+}));
 
-app.use("/auth",authRouter);
+app.use("/auth", authRouter);
 
 app.get("/", (req, res) => {
   res.json({ message: "Hello World" });
 });
 
-io.on("connect", (socket) => {});
+if (io) {
+  io.on("connect", (socket) => {
+    // Aquí puedes escribir el código que necesites para manejar la conexión del socket
+  });
+}
 
-server.listen(3000, () => {
-  console.log("Server listening on port 3000");
+const serverInstance = server.listen(process.env.PORT || 3000, () => {
+  console.log(`Server listening on port ${serverInstance.address().port}`);
 });
+
+module.exports = { app, redisClient, serverInstance };
