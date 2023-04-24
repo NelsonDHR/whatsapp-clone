@@ -8,5 +8,10 @@ export default defineConfig({
     alias: {
       '@whatsapp-clone/common': '@whatsapp-clone/common/index.es.js'
     }
+  },
+  server: {
+    host: true,
+    strictPort: true,
+    port: 8080,
   }
 })
