@@ -14,7 +14,7 @@ const server = require("http").createServer(app);
 
 const io = process.env.NODE_ENV !== "test" ? new Server(server, {
   cors: {
-    origin: "http://localhost:5173",
+    origin: "http://localhost:8080",
     credentials: true,
   },
 }) : null;
@@ -23,7 +23,7 @@ let redisClient = new Redis();
 
 app.use(helmet());
 app.use(cors({
-  origin: "http://localhost:5173",
+  origin: "http://localhost:8080",
   credentials: true,
 }));
 
