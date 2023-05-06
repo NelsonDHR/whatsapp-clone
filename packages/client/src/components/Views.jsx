@@ -1,6 +1,7 @@
 import { Routes, Route } from "react-router-dom";
 import LogIn from "./access/LogIn";
 import SignUp from "./access/SignUp";
+import Home from "./home/Home";
 import { Text } from "@chakra-ui/layout";
 import PrivateRoutes from "./PrivateRoutes";
 import { AccountContext } from "./AccountContext";
@@ -17,7 +18,7 @@ const Views = () => {
       <Route path="/log-in" element={<LogIn />} />
       <Route path="/sign-up" element={<SignUp />} />
       <Route element={<PrivateRoutes />}>
-        <Route path="/home" element={<Text>Hi welcome home.</Text>} />
+        <Route path="/home" element={<Home />} />
       </Route>
     </Routes>
   );
