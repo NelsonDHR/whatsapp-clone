@@ -17,7 +17,7 @@ const LogIn = () => {
         username: "",
         password: "",
       }}
-      validationSchema={formSchema}
+      validationSchema={formSchema.formSchema}
       onSubmit={(values, actions) => {
         const vals = { ...values };
         actions.resetForm();
