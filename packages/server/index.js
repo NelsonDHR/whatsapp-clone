@@ -30,12 +30,17 @@ app.get("/", (req, res) => {
 
 io.use(wrap(sessionMiddleware));
 
-if (io) {
+io.on("connect", (socket) => {
+	// Aquí puedes escribir el código que necesites para manejar la conexión del socket
+	console.log(socket.id)
+	console.log(socket.request.session.user.username)
+});
+/* if (io) {
 	io.on("connect", (socket) => {
 		// Aquí puedes escribir el código que necesites para manejar la conexión del socket
 		console.log(socket.request.sessionuser.username)
 	});
-}
+} */
 
 const serverInstance = server.listen(process.env.PORT || 3000, () => {
 	console.log(`Server listening on port ${serverInstance.address().port}`);
