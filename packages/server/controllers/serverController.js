@@ -18,7 +18,7 @@ const sessionMiddleware= session({
     },
 })
 
-const wrap = (expressMiddleware) => (socket,next) => expressMiddleware(socket, request,{}, next)
+const wrap = (expressMiddleware) => (socket,next) => expressMiddleware(socket.request,{}, next)
 
 const corsConfig ={
     origin: "http://localhost:8080",

@@ -21,7 +21,9 @@ const Chat = () => {
 			fontSize="lg"
 		>
 			<TabPanels>
+				<TabPanel>
 				<Text>No bitches</Text>
+				</TabPanel>
 			</TabPanels>
 		</VStack>
 	);
