@@ -11,5 +11,12 @@ const formSchema = Yup.object({
     .max(20, "Password too long"),
 });
 
-module.exports = {formSchema};
+const friendSchema= Yup.object({
+  friendName:Yup.string()
+  .required("Username required")
+  .min(6, "Invalid Username")
+  .max(20, "Invalid Username")
+})
+
+module.exports = {formSchema,friendSchema};
 
