@@ -25,4 +25,4 @@ const corsConfig ={
     credentials: true,
 }
 
-module.exports = {sessionMiddleware,wrap,corsConfig};
+module.exports = { sessionMiddleware, wrap, corsConfig, redisClient};

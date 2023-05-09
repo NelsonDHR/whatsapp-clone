@@ -1,5 +1,6 @@
 const request = require("supertest");
-const { app, redisClient, serverInstance } = require("../index");
+const { app, serverInstance } = require("../index");
+const { redisClient } = require("../controllers/serverController");
 
 afterAll(async () => {
   await new Promise((resolve) => setTimeout(() => resolve(), 500));
