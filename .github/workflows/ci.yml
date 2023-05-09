@@ -21,7 +21,7 @@ jobs:
         npm install
     - name: Install dependencies
       run: |
-        cd ${{ github.workspace }}/packages/server/
+        cd ${{ github.workspace }}/packages/server
         npm install
     - name: Run tests
       run: |
