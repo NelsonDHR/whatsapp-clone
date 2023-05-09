@@ -16,7 +16,7 @@ const friendSchema= Yup.object({
   .required("Username required")
   .min(6, "Invalid Username")
   .max(20, "Invalid Username")
-})
+});
 
 module.exports = {formSchema,friendSchema};
 
