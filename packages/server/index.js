@@ -6,6 +6,7 @@ const express = require("express");
 require("dotenv").config();
 const authRouter = require("./routers/authRouter");
 const { sessionMiddleware,wrap,corsConfig} = require("./controllers/serverController");
+const { authorizeUser } = require("./controllers/socketController");
 
 const app = express();
 const server = require("http").createServer(app);
@@ -29,6 +30,7 @@ app.get("/", (req, res) => {
 });
 
 io.use(wrap(sessionMiddleware));
+io.use(authorizeUser)
 
 io.on("connect", (socket) => {
 	// Aquí puedes escribir el código que necesites para manejar la conexión del socket
