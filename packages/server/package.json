@@ -7,7 +7,6 @@
     "test": "jest --detectOpenHandles --coverage",
     "dev": "nodemon index.js",
     "lint": "eslint",
-    "test:coverage": "jest --coverage",
     "sonar": "sonar-scanner"
   },
   "keywords": [],

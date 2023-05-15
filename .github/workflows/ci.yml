@@ -5,13 +5,41 @@ on:
     branches: [ dev ]
 
 jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+
+    - uses: actions/checkout@v3
+
+    - name: Use Node.js 18.x
+      uses: actions/setup-node@v1
+      with:
+        node-version: 18.x
+
+    - name: Install dependencies
+      run: |
+        cd ${{ github.workspace }}/packages/server/
+        npm install
+
+    - name: Run tests
+      run: |
+        cd ${{ github.workspace }}/packages/server/
+        npm test
+
   sonarcloud:
+    
+
     name: SonarCloud
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
         with:
           fetch-depth: 0
+      - name: Mi acción
+        run: |
+          cd $GITHUB_WORKSPACE
+          ls
       - name: SonarCloud Scan
         uses: SonarSource/sonarcloud-github-action@master
         env:
