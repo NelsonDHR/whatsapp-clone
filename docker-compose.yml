@@ -23,7 +23,25 @@ services:
       context: ./packages/server
       dockerfile: Dockerfile
     container_name: whatsapp-clone-server
+    environment:
+      DATABASE_HOST: database
+      DATABASE_NAME: whatsapp
+      DATABASE_USER: postgres
+      DATABASE_PASSWORD: 1234
+      COOKIE_SECRET: randomletters
+      NODE_ENV: test
     ports:
       - "3000:3000"
     depends_on:
       - common
+
+  database:
+    build:
+      context: ./packages/database
+      dockerfile: Dockerfile
+    container_name: whatsapp-clone-db
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 1234
+    ports:
+      - "5434:5432"

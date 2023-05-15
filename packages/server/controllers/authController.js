@@ -1,4 +1,4 @@
-const pool = require("../db");
+const pool = require("../db-connection");
 const bcrypt = require("bcrypt");
 
 module.exports.handleLogin = (req, res) => {
@@ -37,7 +37,7 @@ module.exports.attempLogin = async (req, res) => {
 
 module.exports.attempRegister = async (req, res) => {
 	const existingUser = await pool.query(
-		"SELECT username from users WHERE username=$1",
+		"SELECT username FROM users WHERE username=$1",
 		[req.body.username]
 	);
 	if (existingUser.rowCount === 0) {
