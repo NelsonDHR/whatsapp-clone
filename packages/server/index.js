@@ -5,20 +5,22 @@ const { Server } = require("socket.io");
 const express = require("express");
 require("dotenv").config();
 const authRouter = require("./routers/authRouter");
-const { sessionMiddleware,wrap,corsConfig} = require("./controllers/serverController");
+const {
+	sessionMiddleware,
+	wrap,
+	corsConfig,
+} = require("./controllers/serverController");
 const { authorizeUser } = require("./controllers/socketController");
 
 const app = express();
 const server = require("http").createServer(app);
 
 const io = new Server(server, {
-				cors: corsConfig,
-		  });
+	cors: corsConfig,
+});
 
 app.use(helmet());
-app.use(
-	cors(corsConfig)
-);
+app.use(cors(corsConfig));
 
 app.use(express.json());
 app.use(sessionMiddleware);
@@ -30,13 +32,14 @@ app.get("/", (req, res) => {
 });
 
 io.use(wrap(sessionMiddleware));
-io.use(authorizeUser)
+io.use(authorizeUser);
 
 io.on("connect", (socket) => {
 	// Aquí puedes escribir el código que necesites para manejar la conexión del socket
-	console.log(socket.id)
-	console.log(socket.request.session.user.username)
+	console.log(socket.id);
+	console.log(socket.request.session.user.username);
 });
+
 /* if (io) {
 	io.on("connect", (socket) => {
 		// Aquí puedes escribir el código que necesites para manejar la conexión del socket
