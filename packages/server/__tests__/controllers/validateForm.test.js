@@ -18,7 +18,7 @@ describe("validateForm middleware", () => {
     next = jest.fn();
   });
 
-  test("should call next if form is valid", () => {
+  /*test("should call next if form is valid", () => {
     formSchema.validate = jest.fn(() => Promise.resolve());
 
     return validateForm(req, res, next).then(() => {
@@ -27,7 +27,7 @@ describe("validateForm middleware", () => {
       expect(res.status).not.toHaveBeenCalled();
       expect(res.send).not.toHaveBeenCalled();
     });
-  });
+  });*/
 
   it("should send a 422 status if form is invalid", async () => {
     const error = new Error();

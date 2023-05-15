@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1684181630756" clover="3.2.0">
-  <project timestamp="1684181630756" name="All files">
+<coverage generated="1684193532550" clover="3.2.0">
+  <project timestamp="1684193532552" name="All files">
     <metrics statements="96" coveredstatements="92" conditionals="24" coveredconditionals="21" methods="14" coveredmethods="13" elements="134" coveredelements="126" complexity="0" loc="96" ncloc="96" packages="3" files="9" classes="9"/>
     <package name="server">
       <metrics statements="33" coveredstatements="31" conditionals="2" coveredconditionals="2" methods="3" coveredmethods="2"/>
@@ -94,29 +94,29 @@
         <line num="4" count="2" type="stmt"/>
         <line num="6" count="2" type="stmt"/>
         <line num="21" count="2" type="stmt"/>
-        <line num="22" count="2" type="stmt"/>
+        <line num="22" count="1" type="stmt"/>
         <line num="24" count="2" type="stmt"/>
         <line num="29" count="2" type="stmt"/>
       </file>
       <file name="socketController.js" path="/media/jorge/Programación/Univalle/Semestre Actual/DSII/whatsapp-clone/packages/server/controllers/socketController.js">
         <metrics statements="5" coveredstatements="5" conditionals="4" coveredconditionals="4" methods="1" coveredmethods="1"/>
         <line num="1" count="2" type="stmt"/>
-        <line num="2" count="4" type="cond" truecount="4" falsecount="0"/>
-        <line num="3" count="3" type="stmt"/>
-        <line num="4" count="3" type="stmt"/>
+        <line num="2" count="3" type="cond" truecount="4" falsecount="0"/>
+        <line num="3" count="2" type="stmt"/>
+        <line num="4" count="2" type="stmt"/>
         <line num="6" count="1" type="stmt"/>
       </file>
       <file name="validateForm.js" path="/media/jorge/Programación/Univalle/Semestre Actual/DSII/whatsapp-clone/packages/server/controllers/validateForm.js">
         <metrics statements="10" coveredstatements="8" conditionals="2" coveredconditionals="1" methods="3" coveredmethods="3"/>
         <line num="1" count="2" type="stmt"/>
         <line num="3" count="2" type="stmt"/>
-        <line num="4" count="2" type="stmt"/>
-        <line num="5" count="2" type="stmt"/>
+        <line num="4" count="1" type="stmt"/>
+        <line num="5" count="1" type="stmt"/>
         <line num="8" count="1" type="stmt"/>
-        <line num="11" count="2" type="cond" truecount="1" falsecount="1"/>
+        <line num="11" count="1" type="cond" truecount="1" falsecount="1"/>
         <line num="12" count="0" type="stmt"/>
         <line num="13" count="0" type="stmt"/>
-        <line num="15" count="2" type="stmt"/>
+        <line num="15" count="1" type="stmt"/>
         <line num="20" count="2" type="stmt"/>
       </file>
     </package>
