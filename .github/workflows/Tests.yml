@@ -19,10 +19,10 @@ jobs:
 
       - name: Install dependencies
         run: |
-          cd ${{ github.workspace }}/packages/server/
+          cd ${{ github.workspace }}/packages/server
           npm install
 
       - name: Run tests
         run: |
-          cd ${{ github.workspace }}/packages/server/
+          cd ${{ github.workspace }}/packages/server
           npm test
