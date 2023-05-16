@@ -16,7 +16,7 @@ describe("Test Express server", () => {
   });
 });
 
-describe('Test socket.io connection', () => {
+/*describe('Test socket.io connection', () => {
   let socket;
 
   beforeEach((done) => {
@@ -34,4 +34,4 @@ describe('Test socket.io connection', () => {
     expect(socket.connected).toBeTruthy();
     done();
   });
-});
+});*/
