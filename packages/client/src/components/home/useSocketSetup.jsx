@@ -9,13 +9,13 @@ const useSocketSetup = setFriendList => {
         socket.on("friends",friendList => {
             console.log(friendList);
             setFriendList(friendList);
-        })
+        });
         socket.on("connect_error",() => {
             setUser({loggedIn:false})
-        })
+        });
         return () => {
             socket.off("connect_error");
-        }
+        };
     },[setUser]);
 }
 
