@@ -7,11 +7,8 @@ import useSocketSetup from "./useSocketSetup";
 export const FriendContext = createContext();
 
 const Home = () => {
-	const [friendList, setFriendList] = useState([
-		{ name: "Nelson", connected: true },
-		{ name: "Miguel", connected: false },
-	]);
-	useSocketSetup();
+	const [friendList, setFriendList] = useState([``]);
+	useSocketSetup(setFriendList);
 	return (
 		<FriendContext.Provider value={{ friendList, setFriendList }}>
 			<Grid templateColumns="repeat(10, 1fr)" h="100vh" as={Tabs}>

@@ -1,49 +1,49 @@
-import {
-	HStack,
-	VStack,
-	Heading,
-	Divider,
-	Text,
-	Circle,
-} from "@chakra-ui/layout";
-import { TabList, Tab } from "@chakra-ui/tabs";
 import { Button } from "@chakra-ui/button";
+import { useDisclosure } from "@chakra-ui/hooks";
 import { ChatIcon } from "@chakra-ui/icons";
+import {
+  Circle,
+  Divider,
+  Heading,
+  HStack,
+  Text,
+  VStack,
+} from "@chakra-ui/layout";
+import { Tab, TabList } from "@chakra-ui/tabs";
 import { useContext } from "react";
+import {AddFriendModal} from "./AddFriendModal";
 import { FriendContext } from "./Home";
-import { AddFriendModal } from "./AddFriendModal";
-import { useDisclosure } from "@chakra-ui/react";
 
 const Sidebar = () => {
-	const { friendList, setFriendList } = useContext(FriendContext);
-	const {isOpen,onOpen,onClose} = useDisclosure();
-	return (
-		<>
-		<VStack py="1rem">
-			<HStack justify="space-evenly" w="100%">
-				<Heading size="md">Add Friend</Heading>
-				<Button onClick={onOpen}>
-					<ChatIcon />
-				</Button>
-			</HStack>
-			<Divider />
-			<VStack as={TabList}>
-				{friendList.map((friend) => {
-					return (
-						<HStack as={Tab}>
-							<Circle
-								size="10px"
-								bg={friend.connected ? "green.500" : "red.500"}
-							/>
-							<Text>{friend.name}</Text>
-						</HStack>
-					);
-				})}
-			</VStack>
-		</VStack>
-		<AddFriendModal isOpen={isOpen} onClose={onClose}/>
-		</>
-	);
+  const { friendList } = useContext(FriendContext);
+  console.log(friendList)
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  return (
+    <>
+      <VStack py="1.4rem">
+        <HStack justify="space-evenly" w="100%">
+          <Heading size="md">Add Friend</Heading>
+          <Button onClick={onOpen}>
+            <ChatIcon />
+          </Button>
+        </HStack>
+        <Divider />
+        <VStack as={TabList}>
+          {friendList.map(friend => (
+            <HStack as={Tab} key={`friend:${friend}`}>
+              <Circle
+                bg={friend !==`` ? friend.connected ? "green.700" : "red.500" : ""}
+                w="20px"
+                h="20px"
+              />
+              <Text>{friend ? friend: ``}</Text>
+            </HStack>
+          ))}
+        </VStack>
+      </VStack>
+      <AddFriendModal isOpen={isOpen} onClose={onClose} />
+    </>
+  );
 };
 
 export default Sidebar;
