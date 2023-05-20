@@ -29,13 +29,15 @@ const Sidebar = () => {
 			<Divider />
 			<VStack as={TabList}>
 				{friendList.map((friend) => {
+					console.log(friend)
 					return (
-						<HStack as={Tab}>
+						
+						<HStack as={Tab} key={`friend:${friend}`}>
 							<Circle
 								size="10px"
 								bg={friend.connected ? "green.500" : "red.500"}
 							/>
-							<Text>{friend.name}</Text>
+							<Text>{friend}</Text>
 						</HStack>
 					);
 				})}
