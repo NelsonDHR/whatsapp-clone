@@ -10,7 +10,7 @@ const {
 	wrap,
 	corsConfig,
 } = require("./controllers/serverController");
-const { authorizeUser, addFriend } = require("./controllers/socketController");
+const { authorizeUser, addFriend, onDisconnect } = require("./controllers/socketController");
 
 const app = express();
 const server = require("http").createServer(app);
@@ -39,7 +39,8 @@ io.on("connect", (socket) => {
 	console.log("USERID: ",socket.user.userid);
 	console.log(socket.request.session.user.username);
 
-	socket.on("add_friend",(friendName,cb)=>{addFriend(socket,friendName,cb)})
+	socket.on("add_friend",(friendName,cb)=>{addFriend(socket,friendName,cb)});
+	socket.on("disconnecting", () => onDisconnect(socket))
 });
 
 /* if (io) {
