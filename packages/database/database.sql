@@ -8,8 +8,3 @@ CREATE TABLE users(
     passhash VARCHAR NOT NULL,
     userid VARCHAR NOT NULL UNIQUE
 );
-
-INSERT INTO
-    users(username, passhash)
-VALUES
-    ('testUser', '$2a$12$hERtvxjEg/2R4ruFvVkzQOO/KM1V91zCpslwOOllagyGZnma1w3Zu');
