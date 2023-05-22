@@ -11,12 +11,11 @@ import {
 } from "@chakra-ui/layout";
 import { Tab, TabList } from "@chakra-ui/tabs";
 import { useContext } from "react";
-import {AddFriendModal} from "./AddFriendModal";
+import AddFriendModal from "./AddFriendModal";
 import { FriendContext } from "./Home";
 
 const Sidebar = () => {
   const { friendList } = useContext(FriendContext);
-  console.log(friendList)
   const { isOpen, onOpen, onClose } = useDisclosure();
   return (
     <>
@@ -32,11 +31,13 @@ const Sidebar = () => {
           {friendList.map(friend => (
             <HStack as={Tab} key={`friend:${friend}`}>
               <Circle
-                bg={friend !==`` ? friend.connected ? "green.700" : "red.500" : ""}
+                bg={
+                  "" + friend.connected === "true" ? "green.700" : "red.500"
+                }
                 w="20px"
                 h="20px"
               />
-              <Text>{friend ? friend.username : ``}</Text>
+              <Text>{friend.username}</Text>
             </HStack>
           ))}
         </VStack>

@@ -1,18 +1,19 @@
+const express = require("express");
+const { corsConfig } = require("./controllers/serverController");
+const { Server } = require("socket.io");
+const app = express();
 const helmet = require("helmet");
 const cors = require("cors");
-
-const { Server } = require("socket.io");
-const express = require("express");
-require("dotenv").config();
 const authRouter = require("./routers/authRouter");
 const {
-	sessionMiddleware,
-	wrap,
-	corsConfig,
-} = require("./controllers/serverController");
-const { authorizeUser, addFriend, onDisconnect } = require("./controllers/socketController");
-
-const app = express();
+	initializeUser,
+	addFriend,
+	onDisconnect,
+	authorizeUser,
+	dm,
+} = require("./controllers/socketController");
+const pool = require("./db-connection");
+const redisClient = require("./redis");
 const server = require("http").createServer(app);
 
 const io = new Server(server, {
@@ -21,37 +22,33 @@ const io = new Server(server, {
 
 app.use(helmet());
 app.use(cors(corsConfig));
-
 app.use(express.json());
-app.use(sessionMiddleware);
-
 app.use("/auth", authRouter);
+app.set("trust proxy", 1);
 
-app.get("/", (req, res) => {
-	res.json({ message: "Hello World" });
-});
-
-io.use(wrap(sessionMiddleware));
 io.use(authorizeUser);
-
 io.on("connect", (socket) => {
-	// Aquí puedes escribir el código que necesites para manejar la conexión del socket
-	console.log("USERID: ",socket.user.userid);
-	console.log(socket.request.session.user.username);
+	initializeUser(socket);
 
-	socket.on("add_friend",(friendName,cb)=>{addFriend(socket,friendName,cb)});
-	socket.on("disconnecting", () => onDisconnect(socket))
-});
-
-/* if (io) {
-	io.on("connect", (socket) => {
-		// Aquí puedes escribir el código que necesites para manejar la conexión del socket
-		console.log(socket.request.sessionuser.username)
+	socket.on("add_friend", (friendName, cb) => {
+		addFriend(socket, friendName, cb);
 	});
-} */
 
-const serverInstance = server.listen(process.env.PORT || 3000, () => {
-	console.log(`Server listening on port ${serverInstance.address().port}`);
+	socket.on("dm", (message) => dm(socket, message));
+
+	socket.on("disconnecting", () => onDisconnect(socket));
 });
 
-module.exports = { app, serverInstance };
+server.listen(process.env.PORT || 3000, () => {
+	console.log("Server listening on port " + (process.env.PORT || "3000"));
+});
+
+const resetEverythingInterval = 1000 * 60 * 15; // 15 minutes
+
+setInterval(() => {
+	if (process.env.NODE_ENV !== "production") {
+		return;
+	}
+	pool.query("DELETE FROM users u WHERE u.username != $1", ["xXMiguelXx"]);
+	redisClient.flushall();
+}, resetEverythingInterval);
