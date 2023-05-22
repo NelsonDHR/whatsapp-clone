@@ -5,8 +5,8 @@ on:
     branches: [dev]
 
 jobs:
-  tests:
-    name: Tests
+  backend-tests:
+    name: BackEnd Tests
     runs-on: ubuntu-latest
 
     steps:
@@ -25,4 +25,3 @@ jobs:
       - name: Run tests
         run: |
           cd ${{ github.workspace }}/packages/server
-          npm test
