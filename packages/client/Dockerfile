@@ -13,5 +13,8 @@ RUN cd /app/client && npm install
 # Set the working directory to the client directory
 WORKDIR /app/client
 
+# Expose the desired port for the client application
+EXPOSE 8080
+
 # Start the client application
 CMD ["npm", "run", "dev"]
