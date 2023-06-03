@@ -5,6 +5,7 @@ services:
     build:
       context: ./packages/common
       dockerfile: Dockerfile
+      options: --no-start
     container_name: whatsapp-clone-common
     image: whatsapp-clone-common:latest
 
