@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">10% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>1/10</span>
+                <span class='fraction'>10/10</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">87.5% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>0/8</span>
+                <span class='fraction'>7/8</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>0/5</span>
+                <span class='fraction'>5/5</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">10% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>1/10</span>
+                <span class='fraction'>10/10</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line low'></div>
+    <div class='status-line high'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -139,21 +139,20 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -161,10 +160,11 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -209,20 +209,20 @@ import { useContext, useEffect, useRef } from "react";
 import ChatBox from "./ChatBox";
 import { FriendContext, MessagesContext } from "./Home";
 &nbsp;
-const Chat = <span class="fstat-no" title="function not covered" >({</span> userid }) =&gt; {
-  const { friendList } = <span class="cstat-no" title="statement not covered" >useContext(FriendContext);</span>
-  const { messages } = <span class="cstat-no" title="statement not covered" >useContext(MessagesContext);</span>
-  const bottomDiv = <span class="cstat-no" title="statement not covered" >useRef(null);</span>
+const Chat = ({ userid }) =&gt; {
+  const { friendList } = useContext(FriendContext);
+  const { messages } = useContext(MessagesContext);
+  const bottomDiv = useRef(null);
 &nbsp;
-<span class="cstat-no" title="statement not covered" >  useEffect(<span class="fstat-no" title="function not covered" >()</span> =&gt; {</span>
-<span class="cstat-no" title="statement not covered" >    bottomDiv.current?.scrollIntoView();</span>
+  useEffect(() =&gt; {
+    bottomDiv.current?.scrollIntoView();
   });
 &nbsp;
-<span class="cstat-no" title="statement not covered" >  return friendList.length &gt; 0 ? (</span>
+  return friendList.length &gt; 0 ? (
     &lt;VStack h="100%" justify="end"&gt;
       &lt;TabPanels overflowY="scroll"&gt;
-        {friendList.map(<span class="fstat-no" title="function not covered" >fr</span>iend =&gt; (
-<span class="cstat-no" title="statement not covered" >          &lt;VStack</span>
+        {friendList.map(friend =&gt; (
+          &lt;VStack
             flexDir="column-reverse"
             as={TabPanel}
             key={`chat:${friend.username}`}
@@ -231,10 +231,10 @@ const Chat = <span class="fstat-no" title="function not covered" >({</span> user
             &lt;div ref={bottomDiv} /&gt;
             {messages
               .filter(
-<span class="fstat-no" title="function not covered" >                ms</span>g =&gt; <span class="cstat-no" title="statement not covered" >msg.to === friend.userid || msg.from === friend.userid</span>
+                msg =&gt; msg.to === friend.userid || msg.from === friend.userid
               )
-              .map(<span class="fstat-no" title="function not covered" >(m</span>essage, idx) =&gt; (
-<span class="cstat-no" title="statement not covered" >                &lt;Text</span>
+              .map((message, idx) =&gt; (
+                &lt;Text
                   m={
                     message.to === friend.userid
                       ? "1rem 0 0 auto !important"
@@ -257,7 +257,7 @@ const Chat = <span class="fstat-no" title="function not covered" >({</span> user
       &lt;ChatBox userid={userid} /&gt;
     &lt;/VStack&gt;
   ) : (
-    &lt;VStack
+<span class="branch-1 cbranch-no" title="branch not covered" >    &lt;VStack</span>
       justify="center"
       pt="5rem"
       w="100%"
@@ -280,7 +280,7 @@ export default Chat;</pre></td></tr></table></pre>
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2023-06-11T17:06:39.073Z
+                at 2023-06-11T20:13:28.251Z
             </div>
         <script src="../../../prettify.js"></script>
         <script>
