@@ -3,7 +3,7 @@ import { AccountContext } from "./AccountContext";
 
 import { Outlet, Navigate } from "react-router-dom";
 
-const useAuth = () => {
+export const useAuth = () => {
   const {user} = useContext(AccountContext)
   return user && user.loggedIn;
 };
