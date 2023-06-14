@@ -19,10 +19,10 @@ it("test_loading_message_displayed", () => {
 it("test_user_not_logged_in_tries_to_access_home_page", () => {
   const mockContext = { user: { loggedIn: false } };
   const history = createMemoryHistory();
-  history.push("/");
+  //history.push("/");
   const { getByText } = render(
     <AccountContext.Provider value={mockContext}>
-      <MemoryRouter initialEntries={['/']}>
+      <MemoryRouter initialEntries={['/home']}>
         <Views />
       </MemoryRouter>
     </AccountContext.Provider>

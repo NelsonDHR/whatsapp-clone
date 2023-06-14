@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1686617177040" clover="3.2.0">
-  <project timestamp="1686617177041" name="All files">
-    <metrics statements="153" coveredstatements="32" conditionals="53" coveredconditionals="7" methods="56" coveredmethods="6" elements="262" coveredelements="45" complexity="0" loc="153" ncloc="153" packages="4" files="17" classes="17"/>
+<coverage generated="1686707273964" clover="3.2.0">
+  <project timestamp="1686707273965" name="All files">
+    <metrics statements="153" coveredstatements="34" conditionals="53" coveredconditionals="8" methods="56" coveredmethods="7" elements="262" coveredelements="49" complexity="0" loc="153" ncloc="153" packages="4" files="17" classes="17"/>
     <package name="src">
       <metrics statements="5" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="0"/>
       <file name="App.jsx" path="C:\Users\ACER\Desktop\U7mo\AaAaAa\whatsapp-clone\packages\client\src\App.jsx">
@@ -23,7 +23,7 @@
       </file>
     </package>
     <package name="src.components">
-      <metrics statements="34" coveredstatements="16" conditionals="17" coveredconditionals="7" methods="11" coveredmethods="5"/>
+      <metrics statements="34" coveredstatements="18" conditionals="17" coveredconditionals="8" methods="11" coveredmethods="6"/>
       <file name="AccountContext.jsx" path="C:\Users\ACER\Desktop\U7mo\AaAaAa\whatsapp-clone\packages\client\src\components\AccountContext.jsx">
         <metrics statements="18" coveredstatements="2" conditionals="7" coveredconditionals="0" methods="5" coveredmethods="0"/>
         <line num="5" count="2" type="stmt"/>
@@ -46,13 +46,13 @@
         <line num="41" count="0" type="stmt"/>
       </file>
       <file name="PrivateRoutes.jsx" path="C:\Users\ACER\Desktop\U7mo\AaAaAa\whatsapp-clone\packages\client\src\components\PrivateRoutes.jsx">
-        <metrics statements="6" coveredstatements="4" conditionals="4" coveredconditionals="2" methods="2" coveredmethods="1"/>
+        <metrics statements="6" coveredstatements="6" conditionals="4" coveredconditionals="3" methods="2" coveredmethods="2"/>
         <line num="6" count="2" type="stmt"/>
-        <line num="7" count="2" type="stmt"/>
-        <line num="8" count="2" type="cond" truecount="2" falsecount="0"/>
+        <line num="7" count="3" type="stmt"/>
+        <line num="8" count="3" type="cond" truecount="2" falsecount="0"/>
         <line num="11" count="2" type="stmt"/>
-        <line num="12" count="0" type="stmt"/>
-        <line num="13" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="12" count="1" type="stmt"/>
+        <line num="13" count="1" type="cond" truecount="1" falsecount="1"/>
       </file>
       <file name="TextField.jsx" path="C:\Users\ACER\Desktop\U7mo\AaAaAa\whatsapp-clone\packages\client\src\components\TextField.jsx">
         <metrics statements="3" coveredstatements="3" conditionals="2" coveredconditionals="1" methods="1" coveredmethods="1"/>
