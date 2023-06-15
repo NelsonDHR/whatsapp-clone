@@ -23,7 +23,7 @@ const Login = () => {
       onSubmit={(values, actions) => {
         const vals = { ...values };
         actions.resetForm();
-        fetch("http://localhost:3000/auth/log-in", {
+        fetch(`${process.env.REACT_APP_SERVER_URL}/auth/log-in`, {
           method: "POST",
           credentials: "include",
           headers: {

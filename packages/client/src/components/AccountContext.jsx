@@ -11,7 +11,7 @@ const UserContext = ({ children }) => {
   });
   const navigate = useNavigate();
   useEffect(() => {
-    fetch("http://localhost:3000/auth/log-in", {
+    fetch(`${process.env.REACT_APP_SERVER_URL}/auth/log-in`, {
       credentials: "include",
       headers: {
         authorization: `Bearer ${user.token}`,

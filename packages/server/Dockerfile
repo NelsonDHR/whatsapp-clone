@@ -1,5 +1,5 @@
 # Use the custom base image
-FROM whatsapp-clone-common
+FROM jorgeasmz/whatsapp-clone-common:latest
 
 # Set the working directory in the container
 WORKDIR /app
@@ -9,6 +9,9 @@ RUN apt-get update && apt-get install -y redis-server
 
 # Expose the Redis port
 EXPOSE 6379
+
+# Expose the server port
+EXPOSE 3000
 
 # Copy the server directory into the container
 COPY . /app/server

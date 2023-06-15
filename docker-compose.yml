@@ -1,40 +1,6 @@
 version: "3"
 
 services:
-  common:
-    build:
-      context: ./packages/common
-      dockerfile: Dockerfile
-      options: --no-start
-    container_name: whatsapp-clone-common
-    image: whatsapp-clone-common:latest
-
-  client:
-    build:
-      context: ./packages/client
-      dockerfile: Dockerfile
-    container_name: whatsapp-clone-client
-    ports:
-      - "8080:8080"
-    depends_on:
-      - common
-
-  server:
-    build:
-      context: ./packages/server
-      dockerfile: Dockerfile
-    container_name: whatsapp-clone-server
-    environment:
-      DATABASE_HOST: database
-      DATABASE_NAME: whatsapp
-      DATABASE_USER: postgres
-      DATABASE_PASSWORD: 1234
-      NODE_ENV: test
-      JWT_SECRET: 321412zcv987asf87b78as8d
-    ports:
-      - "3000:3000"
-    depends_on:
-      - common
 
   database:
     build:
@@ -46,3 +12,30 @@ services:
       POSTGRES_PASSWORD: 1234
     ports:
       - "5434:5432"
+
+  server:
+    build:
+      context: ./packages/server
+      dockerfile: Dockerfile
+    container_name: whatsapp-clone-server
+    environment:
+      DATABASE_HOST: database
+      DATABASE_NAME: whatsapp
+      DATABASE_USER: postgres
+      DATABASE_PASSWORD: 1234
+      JWT_SECRET: 321412zcv987asf87b78as8d
+      NODE_ENV: development
+    ports:
+      - "3000:3000"
+    depends_on:
+      - database
+
+  client:
+    build:
+      context: ./packages/client
+      dockerfile: Dockerfile
+    container_name: whatsapp-clone-client
+    ports:
+      - "8080:8080"
+    depends_on:
+      - server
