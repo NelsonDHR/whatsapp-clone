@@ -13,7 +13,6 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@whatsapp-clone/common": "1.0.0",
     "bcrypt": "^5.1.0",
     "connect-redis": "^7.0.1",
     "cors": "^2.8.5",
@@ -29,7 +28,8 @@
     "redis-server": "^1.2.2",
     "socket.io": "^4.6.1",
     "socket.io-client": "^4.6.1",
-    "uuid": "^9.0.0"
+    "uuid": "^9.0.0",
+    "yup": "^1.2.0"
   },
   "devDependencies": {
     "eslint": "^8.40.0",

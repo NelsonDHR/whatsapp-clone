@@ -1,6 +1,6 @@
 import { Grid, GridItem, Tabs } from "@chakra-ui/react";
 import { createContext, useContext, useEffect, useState } from "react";
-import socketConn from "../../socket";
+import socketConn from "../../Socket";
 import { AccountContext } from "../AccountContext";
 import Chat from "./Chat";
 import Sidebar from "./Sidebar";

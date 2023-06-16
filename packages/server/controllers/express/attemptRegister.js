@@ -30,7 +30,6 @@ const attemptRegister = async (req, res) => {
         res.json({ loggedIn: true, token });
       })
       .catch(err => {
-        console.log(err);
         res.json({ loggedIn: false, status: "Try again later" });
       });
   } else {

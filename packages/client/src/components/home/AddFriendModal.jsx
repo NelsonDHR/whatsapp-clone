@@ -7,7 +7,7 @@ import {
   ModalHeader,
 } from "@chakra-ui/modal";
 import { Button, Heading, ModalOverlay } from "@chakra-ui/react";
-import friendSchema from "@whatsapp-clone/common";
+import Schemas from "../../Schemas";
 import { Form, Formik } from "formik";
 import { useCallback, useContext, useState } from "react";
 import TextField from "../TextField";
@@ -43,7 +43,7 @@ const AddFriendModal = ({ isOpen, onClose }) => {
               }
             );
           }}
-          validationSchema={friendSchema.friendSchema}
+          validationSchema={Schemas.friendSchema}
         >
           <Form>
             <ModalBody>

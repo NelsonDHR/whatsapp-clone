@@ -34,10 +34,8 @@ const attemptLogin = async (req, res) => {
         });
     } else {
       res.json({ loggedIn: false, status: "Wrong username or password!" });
-      console.log("wrong pass");
     }
   } else {
-    console.log("not good");
     res.json({ loggedIn: false, status: "Wrong username or password!" });
   }
 };
