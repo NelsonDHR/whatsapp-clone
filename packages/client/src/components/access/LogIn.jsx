@@ -5,7 +5,7 @@ import {
   Text,
   VStack,
 } from "@chakra-ui/react";
-import formSchema from "@whatsapp-clone/common";
+import Schemas from "../../Schemas";
 import { Form, Formik } from "formik";
 import { useContext, useState } from "react";
 import { useNavigate } from "react-router";
@@ -19,7 +19,7 @@ const Login = () => {
   return (
     <Formik
       initialValues={{ username: "", password: "" }}
-      validationSchema={formSchema.formSchema}
+      validationSchema={Schemas.formSchema}
       onSubmit={(values, actions) => {
         const vals = { ...values };
         actions.resetForm();

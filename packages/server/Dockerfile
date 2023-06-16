@@ -1,5 +1,5 @@
 # Use the custom base image
-FROM jorgeasmz/whatsapp-clone-common:latest
+FROM node:latest
 
 # Set the working directory in the container
 WORKDIR /app
