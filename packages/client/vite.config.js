@@ -9,11 +9,6 @@ export default defineConfig({
       '@whatsapp-clone/common': '@whatsapp-clone/common/index.es.js'
     }
   },
-  build: {
-    rollupOptions: {
-      external: ['yup']
-    }
-  },
   server: {
     host: '0.0.0.0',
     strictPort: true,
