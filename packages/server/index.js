@@ -15,6 +15,7 @@ const {
 const pool = require("./db-connection");
 const redisClient = require("./redis");
 const server = require("http").createServer(app);
+require("dotenv").config();
 
 const io = new Server(server, {
 	cors: corsConfig,
