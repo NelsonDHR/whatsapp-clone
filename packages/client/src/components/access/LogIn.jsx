@@ -1,27 +1,29 @@
-import { Button, ButtonGroup, Heading, VStack } from "@chakra-ui/react";
-import { Form, Formik } from "formik";
+import {
+  Button,
+  ButtonGroup,
+  Heading,
+  Text,
+  VStack,
+} from "@chakra-ui/react";
 import formSchema from "@whatsapp-clone/common";
-import TextField from "../TextField";
-import { useNavigate } from "react-router-dom";
+import { Form, Formik } from "formik";
 import { useContext, useState } from "react";
+import { useNavigate } from "react-router";
 import { AccountContext } from "../AccountContext";
-import { Text } from "@chakra-ui/layout";
+import TextField from "../TextField";
 
-const LogIn = () => {
+const Login = () => {
   const { setUser } = useContext(AccountContext);
   const [error, setError] = useState(null);
   const navigate = useNavigate();
   return (
     <Formik
-      initialValues={{
-        username: "",
-        password: "",
-      }}
-      validationSchema={formSchema}
+      initialValues={{ username: "", password: "" }}
+      validationSchema={formSchema.formSchema}
       onSubmit={(values, actions) => {
         const vals = { ...values };
         actions.resetForm();
-        fetch("http://localhost:3000/auth/log-in", {
+        fetch(`${import.meta.env.VITE_SERVER_URL}/auth/log-in`, {
           method: "POST",
           credentials: "include",
           headers: {
@@ -29,16 +31,16 @@ const LogIn = () => {
           },
           body: JSON.stringify(vals),
         })
-          .catch((err) => {
+          .catch(err => {
             return;
           })
-          .then((res) => {
+          .then(res => {
             if (!res || !res.ok || res.status >= 400) {
               return;
             }
             return res.json();
           })
-          .then((data) => {
+          .then(data => {
             if (!data) return;
             setUser({ ...data });
             if (data.status) {
@@ -52,9 +54,9 @@ const LogIn = () => {
       <VStack
         as={Form}
         w={{ base: "90%", md: "500px" }}
-        h="100vh"
         m="auto"
         justify="center"
+        h="100vh"
         spacing="1rem"
       >
         <Heading>Log In</Heading>
@@ -72,19 +74,21 @@ const LogIn = () => {
           name="password"
           placeholder="Enter password"
           autoComplete="off"
-          type="password"
           label="Password"
+          type="password"
         />
 
         <ButtonGroup pt="1rem">
           <Button colorScheme="teal" type="submit">
             Log In
           </Button>
-          <Button onClick={() => navigate("/sign-up")}>Sign Up</Button>
+          <Button onClick={() => navigate("/sign-up")}>
+            Create Account
+          </Button>
         </ButtonGroup>
       </VStack>
     </Formik>
   );
 };
 
-export default LogIn;
+export default Login;

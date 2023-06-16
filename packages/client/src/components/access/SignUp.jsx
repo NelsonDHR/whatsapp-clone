@@ -1,11 +1,17 @@
-import { Button, ButtonGroup, Heading, VStack } from "@chakra-ui/react";
-import { Form, Formik } from "formik";
+import { ArrowBackIcon } from "@chakra-ui/icons";
+import {
+  Button,
+  ButtonGroup,
+  Heading,
+  Text,
+  VStack,
+} from "@chakra-ui/react";
 import formSchema from "@whatsapp-clone/common";
-import TextField from "../TextField";
-import { useNavigate } from "react-router-dom";
+import { Form, Formik } from "formik";
 import { useContext, useState } from "react";
+import { useNavigate } from "react-router";
 import { AccountContext } from "../AccountContext";
-import { Text } from "@chakra-ui/layout";
+import TextField from "../TextField";
 
 const SignUp = () => {
   const { setUser } = useContext(AccountContext);
@@ -13,15 +19,12 @@ const SignUp = () => {
   const navigate = useNavigate();
   return (
     <Formik
-      initialValues={{
-        username: "",
-        password: "",
-      }}
-      validationSchema={formSchema}
+      initialValues={{ username: "", password: "" }}
+      validationSchema={formSchema.formSchema}
       onSubmit={(values, actions) => {
         const vals = { ...values };
         actions.resetForm();
-        fetch("http://localhost:3000/auth/sign-up", {
+        fetch(`${import.meta.env.VITE_SERVER_URL}/auth/sign-up`, {
           method: "POST",
           credentials: "include",
           headers: {
@@ -29,21 +32,22 @@ const SignUp = () => {
           },
           body: JSON.stringify(vals),
         })
-          .catch((err) => {
+          .catch(err => {
             return;
           })
-          .then((res) => {
+          .then(res => {
             if (!res || !res.ok || res.status >= 400) {
               return;
             }
             return res.json();
           })
-          .then((data) => {
+          .then(data => {
             if (!data) return;
             setUser({ ...data });
             if (data.status) {
               setError(data.status);
             } else if (data.loggedIn) {
+              localStorage.setItem("token", data.token);
               navigate("/home");
             }
           });
@@ -52,9 +56,9 @@ const SignUp = () => {
       <VStack
         as={Form}
         w={{ base: "90%", md: "500px" }}
-        h="100vh"
         m="auto"
         justify="center"
+        h="100vh"
         spacing="1rem"
       >
         <Heading>Sign Up</Heading>
@@ -80,7 +84,9 @@ const SignUp = () => {
           <Button colorScheme="teal" type="submit">
             Create Account
           </Button>
-          <Button onClick={() => navigate("/log-in")}>Log In</Button>
+          <Button onClick={() => navigate("/log-in")} leftIcon={<ArrowBackIcon />}>
+            Back
+          </Button>
         </ButtonGroup>
       </VStack>
     </Formik>

@@ -1,3 +1,4 @@
+.env
 .git
 .vscode
 .dockerignore
@@ -5,7 +6,7 @@
 config
 build
 node_modules
+coverage
 docker-compose.yaml
 Dockerfile
-database.sql
 README.md

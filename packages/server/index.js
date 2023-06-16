@@ -1,62 +1,55 @@
 const express = require("express");
-const helmet = require("helmet");
+const { corsConfig } = require("./controllers/serverController");
 const { Server } = require("socket.io");
+const app = express();
+const helmet = require("helmet");
 const cors = require("cors");
 const authRouter = require("./routers/authRouter");
-const session = require("express-session");
-require("dotenv").config();
-const Redis = require("ioredis");
-const RedisStore = require("connect-redis").default;
-
-const app = express();
-
+const {
+	initializeUser,
+	addFriend,
+	onDisconnect,
+	authorizeUser,
+	dm,
+} = require("./controllers/socketController");
+const pool = require("./db-connection");
+const redisClient = require("./redis");
 const server = require("http").createServer(app);
+require("dotenv").config();
 
-const io = process.env.NODE_ENV !== "test" ? new Server(server, {
-  cors: {
-    origin: "http://localhost:8080",
-    credentials: true,
-  },
-}) : null;
-
-let redisClient = new Redis();
+const io = new Server(server, {
+	cors: corsConfig,
+});
 
 app.use(helmet());
-app.use(cors({
-  origin: "http://localhost:8080",
-  credentials: true,
-}));
-
+app.use(cors(corsConfig));
 app.use(express.json());
-app.use(session({
-  secret: process.env.COOKIE_SECRET,
-  credentials: true,
-  name: "sid",
-  store: new RedisStore({ client: redisClient, prefix: "myapp:" }),
-  resave: false,
-  saveUninitialized: false,
-  cookie: {
-    secure: process.env.ENVIRONMENT === "production" ? "true" : "auto",
-    httpOnly: true,
-    expires: 1000*60*60*24*7,
-    sameSite: process.env.ENVIRONMENT === "production" ? "none": "lax",
-  }
-}));
-
 app.use("/auth", authRouter);
+app.set("trust proxy", 1);
 
-app.get("/", (req, res) => {
-  res.json({ message: "Hello World" });
+io.use(authorizeUser);
+io.on("connect", (socket) => {
+	initializeUser(socket);
+
+	socket.on("add_friend", (friendName, cb) => {
+		addFriend(socket, friendName, cb);
+	});
+
+	socket.on("dm", (message) => dm(socket, message));
+
+	socket.on("disconnecting", () => onDisconnect(socket));
 });
 
-if (io) {
-  io.on("connect", (socket) => {
-    // Aquí puedes escribir el código que necesites para manejar la conexión del socket
-  });
-}
-
-const serverInstance = server.listen(process.env.PORT || 3000, () => {
-  console.log(`Server listening on port ${serverInstance.address().port}`);
+server.listen(process.env.PORT || 3000, () => {
+	console.log("Server listening on port " + (process.env.PORT || "3000"));
 });
 
-module.exports = { app, redisClient, serverInstance };
+const resetEverythingInterval = 1000 * 60 * 15; // 15 minutes
+
+setInterval(() => {
+	if (process.env.NODE_ENV !== "production") {
+		return;
+	}
+	pool.query("DELETE FROM users u WHERE u.username != $1", ["xXMiguelXx"]);
+	redisClient.flushall();
+}, resetEverythingInterval);
