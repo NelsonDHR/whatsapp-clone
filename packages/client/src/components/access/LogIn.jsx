@@ -23,7 +23,7 @@ const Login = () => {
       onSubmit={(values, actions) => {
         const vals = { ...values };
         actions.resetForm();
-        fetch(`${process.env.REACT_APP_SERVER_URL}/auth/log-in`, {
+        fetch(`${import.meta.env.VITE_SERVER_URL}/auth/log-in`, {
           method: "POST",
           credentials: "include",
           headers: {

@@ -16,5 +16,8 @@ WORKDIR /app/client
 # Expose the desired port for the client application
 EXPOSE 8080
 
+# Build the client application
+RUN npm run build
+
 # Start the client application
 CMD ["npm", "run", "dev"]
