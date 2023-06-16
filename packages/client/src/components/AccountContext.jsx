@@ -11,7 +11,8 @@ const UserContext = ({ children }) => {
   });
   const navigate = useNavigate();
   useEffect(() => {
-    fetch(`${import.meta.env.VITE_SERVER_URL}/auth/log-in`, {
+    /* `${import.meta.env.VITE_SERVER_URL}/auth/log-in` */
+    fetch("https://whatsapp-clone-server.fly.dev/auth/log-in", {
       credentials: "include",
       headers: {
         authorization: `Bearer ${user.token}`,

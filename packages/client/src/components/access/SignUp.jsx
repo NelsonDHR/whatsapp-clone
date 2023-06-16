@@ -24,7 +24,8 @@ const SignUp = () => {
       onSubmit={(values, actions) => {
         const vals = { ...values };
         actions.resetForm();
-        fetch(`${import.meta.env.VITE_SERVER_URL}/auth/sign-up`, {
+        /* `${import.meta.env.VITE_SERVER_URL}/auth/sign-up` */
+        fetch("https://whatsapp-clone-server.fly.dev/auth/sign-up", {
           method: "POST",
           credentials: "include",
           headers: {
