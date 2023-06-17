@@ -1,10 +1,11 @@
-name: Tests
+name: Continous Integration
 
 on:
   pull_request:
     branches: [dev]
 
 jobs:
+  
   backend-tests:
     name: BackEnd Tests
     runs-on: ubuntu-latest
@@ -25,6 +26,8 @@ jobs:
       - name: Run tests
         run: |
           cd ${{ github.workspace }}/packages/server
+          npm run test
+
   front-tests:
     name: FrontEnd Tests
     runs-on: ubuntu-latest
@@ -45,3 +48,19 @@ jobs:
       - name: Run tests
         run: |
           cd ${{ github.workspace }}/packages/client/src
+          npm run test
+
+  sonarcloud:
+    name: SonarCloud Scan
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0 # Shallow clones should be disabled for a better relevancy of analysis
+      - name: SonarCloud Scan
+        uses: SonarSource/sonarcloud-github-action@master
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # Needed to get PR information, if any
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          
