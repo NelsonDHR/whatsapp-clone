@@ -1,7 +1,7 @@
 # WhatsApp-clone
 
 ## Integrantes.
-- Miguel Angel Fernandez Villaquirán - *201941923*.
+- Miguel Angel Fernandez Villaquirán - 201941923.
 - Jorge Eduardo Arias Muñoz          - 202042055.
 - Nelson Daniel Herrera Rey          - 201841270.
 
