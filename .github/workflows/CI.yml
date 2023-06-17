@@ -6,61 +6,42 @@ on:
 
 jobs:
   
-  backend-tests:
-    name: BackEnd Tests
-    runs-on: ubuntu-latest
-
-    steps:
-      - uses: actions/checkout@v3
-
-      - name: Use Node.js 18.x
-        uses: actions/setup-node@v1
-        with:
-          node-version: 18.x
-
-      - name: Install dependencies
-        run: |
-          cd ${{ github.workspace }}/packages/server
-          npm install
-
-      - name: Run tests
-        run: |
-          cd ${{ github.workspace }}/packages/server
-          npm run test
-
-  front-tests:
-    name: FrontEnd Tests
-    runs-on: ubuntu-latest
-
-    steps:
-      - uses: actions/checkout@v3
-
-      - name: Use Node.js 18.x
-        uses: actions/setup-node@v1
-        with:
-          node-version: 18.x
-
-      - name: Install dependencies
-        run: |
-          cd ${{ github.workspace }}/packages/client
-          npm install
-
-      - name: Run tests
-        run: |
-          cd ${{ github.workspace }}/packages/client/src
-          npm run test
-
   sonarcloud:
+
     name: SonarCloud Scan
     runs-on: ubuntu-latest
 
     steps:
+
       - uses: actions/checkout@v3
         with:
           fetch-depth: 0 # Shallow clones should be disabled for a better relevancy of analysis
+
+      - name: Use Node.js 18.x
+        uses: actions/setup-node@v1
+        with:
+          node-version: 18.x
+  
+      - name: Install backend dependencies
+        run: |
+          cd ${{ github.workspace }}/packages/server
+          npm install
+  
+      - name: Run backend tests
+        run: |
+          cd ${{ github.workspace }}/packages/server
+          npm run test
+      - name: Install frontend dependencies
+        run: |
+          cd ${{ github.workspace }}/packages/client
+          npm install
+  
+      - name: Run frontend tests
+        run: |
+          cd ${{ github.workspace }}/packages/client/src
+          npm run test
       - name: SonarCloud Scan
         uses: SonarSource/sonarcloud-github-action@master
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # Needed to get PR information, if any
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-          
