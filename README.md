@@ -14,6 +14,7 @@
 
 # Explicación del proyecto.
   ## Pipeline.
+  ![CI_CD drawio](https://github.com/jorgeasmz/whatsapp-clone/assets/71350118/78497862-0641-4e0f-90c0-82389f5459f6)
   - Usando la metodología de Scrum los desarrolladores realizan las historias de usuario que les corresponden durante su sprint. 
   - Cómo para el desarrollo del proyecto se usó la metodología de gitflow cada HU se trabaja en una branch diferente que se desprende de la rama dev. 
     Una vez la HU está completada se realiza el respectivo commit y push al repositorio; ya en el repositorio se realiza el merge con la rama Dev.
@@ -34,3 +35,4 @@
   > Lea la parte de `Pipeline` para entender a qué se refiere con "Esto hará de trigger".
   ## Monitoreo de la aplicación.
   - EL monitoreo está a carga de *fly.io* el cual de manera automática nos ofrece este servicio por medio de grafana.
+
